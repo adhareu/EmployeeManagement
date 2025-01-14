@@ -1,16 +1,16 @@
 ﻿using EmployeeManagement.API.Common.DTOS;
-using EmployeeManagement.API.Features.Designations.Commands.Delete;
-using EmployeeManagement.API.Features.Designations.Commands.Update;
+using EmployeeManagement.API.Features.Designations.Delete;
 using EmployeeManagement.API.Features.Designations.DTOS;
-using EmployeeManagement.API.Features.Designations.Commands.Create;
 
 
 using MediatR;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-using EmployeeManagement.API.Features.Designations.Queries;
+using EmployeeManagement.API.Features.Designations.Get;
 using Microsoft.AspNetCore.Authorization;
+using EmployeeManagement.API.Features.Designations.Create;
+using EmployeeManagement.API.Features.Designations.Update;
 
 namespace EmployeeManagement.API.Features.Designations.Controllers
 {
@@ -34,7 +34,7 @@ namespace EmployeeManagement.API.Features.Designations.Controllers
             return Ok(response);
         }
         [HttpPost]
-        public async Task<ActionResult<BasePostResponseDTO<int,DesignationDto>>> Create([FromBody] CreateDesignationCommand command)
+        public async Task<ActionResult<BasePostResponseDto<int,DesignationDto>>> Create([FromBody] CreateDesignationCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
@@ -51,7 +51,7 @@ namespace EmployeeManagement.API.Features.Designations.Controllers
         }
         [HttpPut]
 
-        public async Task<ActionResult<BasePostResponseDTO<int, DesignationDto>>> Update([FromBody] UpdateDesignationCommand command)
+        public async Task<ActionResult<BasePostResponseDto<int, DesignationDto>>> Update([FromBody] UpdateDesignationCommand command)
         {
 
             var response = await _mediator.Send(command);
@@ -61,7 +61,7 @@ namespace EmployeeManagement.API.Features.Designations.Controllers
         }
         [HttpDelete]
 
-        public async Task<ActionResult<BasePostResponseDTO<int, DesignationDto>>> Delete(int Id)
+        public async Task<ActionResult<BasePostResponseDto<int, DesignationDto>>> Delete(int Id)
         {
 
             var response = await _mediator.Send(new DeleteDesignationCommand(Id));

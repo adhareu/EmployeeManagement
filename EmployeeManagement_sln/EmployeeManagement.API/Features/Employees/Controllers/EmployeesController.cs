@@ -1,12 +1,10 @@
 ﻿
 using EmployeeManagement.API.Common.DTOS;
-
-using EmployeeManagement.API.Features.Employees.Commands.Create;
-using EmployeeManagement.API.Features.Employees.Commands.Delete;
-using EmployeeManagement.API.Features.Employees.Commands.Update;
+using EmployeeManagement.API.Features.Employees.Delete;
+using EmployeeManagement.API.Features.Employees.Create;
 using EmployeeManagement.API.Features.Employees.DTOS;
-using EmployeeManagement.API.Features.Employees.Queries;
-
+using EmployeeManagement.API.Features.Employees.Get;
+using EmployeeManagement.API.Features.Employees.Update;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -33,7 +31,7 @@ namespace EmployeeManagement.API.Features.Employees.Controllers
             return Ok(response);
         }
         [HttpPost]
-        public async Task<ActionResult<BasePostResponseDTO<long, EmployeeDto>>> CreateEmployee([FromBody] CreateEmployeeCommand command)
+        public async Task<ActionResult<BasePostResponseDto<long, EmployeeDto>>> CreateEmployee([FromBody] CreateEmployeeCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
@@ -50,7 +48,7 @@ namespace EmployeeManagement.API.Features.Employees.Controllers
         }
         [HttpPut]
 
-        public async Task<ActionResult<BasePostResponseDTO<long, EmployeeDto>>> Update([FromBody] UpdateEmployeeCommand command)
+        public async Task<ActionResult<BasePostResponseDto<long, EmployeeDto>>> Update([FromBody] UpdateEmployeeCommand command)
         {
 
             var response = await _mediator.Send(command);
@@ -60,7 +58,7 @@ namespace EmployeeManagement.API.Features.Employees.Controllers
         }
         [HttpDelete]
 
-        public async Task<ActionResult<BasePostResponseDTO<long, EmployeeDto>>> Delete(long Id)
+        public async Task<ActionResult<BasePostResponseDto<long, EmployeeDto>>> Delete(long Id)
         {
 
             var response = await _mediator.Send(new DeleteEmployeeCommand(Id));

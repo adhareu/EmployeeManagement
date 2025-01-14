@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using EmployeeManagement.API.Features.Designations.Commands.Create;
-using EmployeeManagement.API.Features.Designations.Commands.Delete;
-using EmployeeManagement.API.Features.Designations.Commands.Update;
+using EmployeeManagement.API.Features.Designations.Create;
+using EmployeeManagement.API.Features.Designations.Delete;
 using EmployeeManagement.API.Features.Designations.DTOS;
 using EmployeeManagement.API.Features.Designations.Models;
+using EmployeeManagement.API.Features.Designations.Update;
 
 
 namespace EmployeeManagement.API.Common.Mappings.Designations

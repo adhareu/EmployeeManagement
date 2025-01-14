@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using EmployeeManagement.API.Features.Departments.Commands.Create;
-using EmployeeManagement.API.Features.Departments.Commands.Delete;
-using EmployeeManagement.API.Features.Departments.Commands.Update;
+using EmployeeManagement.API.Features.Departments.Create;
+using EmployeeManagement.API.Features.Departments.Delete;
 using EmployeeManagement.API.Features.Departments.DTOS;
 using EmployeeManagement.API.Features.Departments.Models;
+using EmployeeManagement.API.Features.Departments.Update;
+
 
 
 namespace EmployeeManagement.API.Common.Mappings.Departments
