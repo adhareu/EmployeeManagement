@@ -23,7 +23,7 @@ namespace EmployeeManagement.API.Features.Departments.Delete
         }
         public async Task<BasePostResponseDto<int, DepartmentPostDto>> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
         {
-            var departmentEntity = await _departmentQueryRepository.Get(request.Id, cancellationToken);
+            var departmentEntity = await _departmentQueryRepository.Get(request.id, cancellationToken);
 
             var mappeddepartment = _mapper.Map<Department>(departmentEntity);
             mappeddepartment.IsDeleted = true;

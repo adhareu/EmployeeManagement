@@ -22,7 +22,7 @@ namespace EmployeeManagement.API.Features.Designations.Delete
         }
         public async Task<BasePostResponseDto<int, DesignationPostDto>> Handle(DeleteDesignationCommand request, CancellationToken cancellationToken)
         {
-            var DesignationEntity = await _DesignationQueryRepository.Get(request.Id, cancellationToken);
+            var DesignationEntity = await _DesignationQueryRepository.Get(request.id, cancellationToken);
 
             var mappedDesignation = _mapper.Map<Designation>(DesignationEntity);
             mappedDesignation.IsDeleted = true;

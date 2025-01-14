@@ -22,7 +22,7 @@ namespace EmployeeManagement.API.Features.Employees.Delete
         }
         public async Task<BasePostResponseDto<long, EmployeePostDto>> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var EmployeeEntity = await _employeeQueryRepository.Get(request.Id, cancellationToken);
+            var EmployeeEntity = await _employeeQueryRepository.Get(request.id, cancellationToken);
 
             var mappedEmployee = _mapper.Map<Employee>(EmployeeEntity);
             mappedEmployee.IsDeleted = true;
