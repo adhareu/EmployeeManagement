@@ -27,14 +27,14 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
         }
         [HttpGet("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<DepartmentDto>> GetAll()
+        public async Task<ActionResult<DepartmentListDto>> GetAll()
         {
             _logger.LogInformation("Get All Departments");
             var response = await _mediator.Send(new GetAllDepartmentQuery());
             return Ok(response);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<DepartmentDto>> Get(int id)
+        public async Task<ActionResult<DepartmentGetDto>> Get(int id)
         {
             _logger.LogInformation("Get All Departments by {Id}",id);
             var department = await _mediator.Send(new GetDepartmentByIdQuery(id));
@@ -45,7 +45,7 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
             return Ok(department);
         }
         [HttpPost]
-        public async Task<ActionResult<BasePostResponseDto<int,DepartmentDto>>> Create([FromBody] CreateDepartmentCommand command)
+        public async Task<ActionResult<BasePostResponseDto<int,DepartmentPostDto>>> Create([FromBody] CreateDepartmentCommand command)
         {
             _logger.LogInformation("Creating Department with name {Name}", command.Name);
             var response = await _mediator.Send(command);
@@ -55,7 +55,7 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
        
         [HttpPut]
       
-        public async Task<ActionResult<BasePostResponseDto<int, DepartmentDto>>> Update([FromBody] UpdateDepartmentCommand command)
+        public async Task<ActionResult<BasePostResponseDto<int, DepartmentPostDto>>> Update([FromBody] UpdateDepartmentCommand command)
         {
             _logger.LogInformation("Updating Department with name {Name}", command.Name);
             var response = await _mediator.Send(command);
@@ -66,7 +66,7 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
         }
         [HttpDelete]
 
-        public async Task<ActionResult<BasePostResponseDto<int, DepartmentDto>>> Delete(int Id)
+        public async Task<ActionResult<BasePostResponseDto<int, DepartmentPostDto>>> Delete(int Id)
         {
             _logger.LogInformation("Deleting Department with id {Id}", Id);
             var response = await _mediator.Send(new DeleteDepartmentCommand(Id));

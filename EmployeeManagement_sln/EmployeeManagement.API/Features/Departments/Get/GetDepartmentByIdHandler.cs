@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Get
 {
-    public class GetDepartmentByIdHandler : IRequestHandler<GetDepartmentByIdQuery, DepartmentDto>
+    public class GetDepartmentByIdHandler : IRequestHandler<GetDepartmentByIdQuery, DepartmentGetDto>
     {
         private readonly IDepartmentQueryRepository _departmentQueryRepository;
         private readonly IMapper _mapper;
@@ -17,9 +17,9 @@ namespace EmployeeManagement.API.Features.Departments.Get
             _departmentQueryRepository = departmentQueryRepository;
             _mapper = mapper;
         }
-        public async Task<DepartmentDto> Handle(GetDepartmentByIdQuery request, CancellationToken cancellationToken)
+        public async Task<DepartmentGetDto> Handle(GetDepartmentByIdQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<Department, DepartmentDto>(await _departmentQueryRepository.Get(request.Id, cancellationToken));
+            return _mapper.Map<Department, DepartmentGetDto>(await _departmentQueryRepository.Get(request.Id, cancellationToken));
 
         }
     }

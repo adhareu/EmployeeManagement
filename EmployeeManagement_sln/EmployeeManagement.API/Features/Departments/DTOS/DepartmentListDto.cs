@@ -2,7 +2,7 @@
 
 namespace EmployeeManagement.API.Features.Departments.DTOS
 {
-    public class DepartmentDto 
+    public class DepartmentListDto 
     {
         public string Name { get; set; } = string.Empty;
     }

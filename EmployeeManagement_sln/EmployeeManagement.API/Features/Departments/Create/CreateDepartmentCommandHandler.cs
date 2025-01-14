@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Create
 {
-    public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, BasePostResponseDto<int, DepartmentDto>>
+    public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, BasePostResponseDto<int, DepartmentPostDto>>
     {
         private readonly IDepartmentCommandRepository _departmentRepository;
         private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ namespace EmployeeManagement.API.Features.Departments.Create
             _mapper = mapper;
 
         }
-        public async Task<BasePostResponseDto<int, DepartmentDto>> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<int, DepartmentPostDto>> Handle(CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
             var department = new Department
             {
@@ -26,7 +26,7 @@ namespace EmployeeManagement.API.Features.Departments.Create
 
             };
             var savedDepartment = await _departmentRepository.Create(department, cancellationToken);
-            var departmentAddResponse = new BasePostResponseDto<int, DepartmentDto>
+            var departmentAddResponse = new BasePostResponseDto<int, DepartmentPostDto>
             {
                 Id = savedDepartment.Id
            ,

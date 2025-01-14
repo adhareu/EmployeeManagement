@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Commands.Create
 {
-    public class CreateDepartmentCommand : IRequest<BasePostResponseDto<int, DepartmentDto>>
+    public class CreateDepartmentCommand : IRequest<BasePostResponseDto<int, DepartmentListDto>>
     {
 
         public string Name { get; set; }

@@ -3,6 +3,6 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Get
 {
-    public record GetDepartmentByIdQuery(int Id) : IRequest<DepartmentDto>;
+    public record GetDepartmentByIdQuery(int Id) : IRequest<DepartmentGetDto>;
 
 }

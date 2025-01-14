@@ -13,7 +13,9 @@ namespace EmployeeManagement.API.Common.Mappings.Departments
     {
         public DepartmentMappingProfile()
         {
-            CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<Department, DepartmentListDto>().ReverseMap();
+            CreateMap<Department, DepartmentGetDto>().ReverseMap();
+            CreateMap<Department, DepartmentPostDto>().ReverseMap();
             CreateMap<Department,CreateDepartmentCommand>().ReverseMap();
             CreateMap<Department,UpdateDepartmentCommand>().ReverseMap();
             CreateMap<Department,DeleteDepartmentCommand>().ReverseMap();

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Get
 {
-    public class GetAllDepartmentQueryHandler : IRequestHandler<GetAllDepartmentQuery, IEnumerable<DepartmentDto>>
+    public class GetAllDepartmentQueryHandler : IRequestHandler<GetAllDepartmentQuery, IEnumerable<DepartmentListDto>>
     {
         private readonly IDepartmentQueryRepository _departmentQueryRepository;
         private readonly IMapper _mapper;
@@ -16,9 +16,9 @@ namespace EmployeeManagement.API.Features.Departments.Get
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DepartmentDto>> Handle(GetAllDepartmentQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<DepartmentListDto>> Handle(GetAllDepartmentQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentDto>>(await _departmentQueryRepository.GetAll(cancellationToken));
+            return _mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentListDto>>(await _departmentQueryRepository.GetAll(cancellationToken));
         }
     }
 }

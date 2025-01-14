@@ -10,7 +10,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Delete
 {
-    public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCommand, BasePostResponseDto<int, DepartmentDto>>
+    public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCommand, BasePostResponseDto<int, DepartmentPostDto>>
     {
         private readonly IDepartmentCommandRepository _departmentRepository;
         private readonly IDepartmentQueryRepository _departmentQueryRepository;
@@ -21,14 +21,14 @@ namespace EmployeeManagement.API.Features.Departments.Delete
             _departmentQueryRepository = departmentQueryRepository;
             _mapper = mapper;
         }
-        public async Task<BasePostResponseDto<int, DepartmentDto>> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<int, DepartmentPostDto>> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
         {
             var departmentEntity = await _departmentQueryRepository.Get(request.Id, cancellationToken);
 
             var mappeddepartment = _mapper.Map<Department>(departmentEntity);
             mappeddepartment.IsDeleted = true;
             var savedDepartment = await _departmentRepository.Update(mappeddepartment, cancellationToken);
-            var departmentResponse = new BasePostResponseDto<int, DepartmentDto>
+            var departmentResponse = new BasePostResponseDto<int, DepartmentPostDto>
             {
                 Id = savedDepartment.Id
            ,
