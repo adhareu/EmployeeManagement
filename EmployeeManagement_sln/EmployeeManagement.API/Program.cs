@@ -1,19 +1,19 @@
 using System.Reflection;
 using Asp.Versioning;
-using EmployeeManagement.API.Infrastructure.Persistence;
+using EmployeeManagement.API.Database;
 using Microsoft.EntityFrameworkCore;
-using EmployeeManagement.API.Infrastructure.Repositories.Departments.Commands;
-using EmployeeManagement.API.Infrastructure.Repositories.Departments.Queries;
-using EmployeeManagement.API.Infrastructure.Repositories.Designations.Commands;
-using EmployeeManagement.API.Infrastructure.Repositories.Employees.Commands;
-using EmployeeManagement.API.Infrastructure.Repositories.Designations.Queries;
-using EmployeeManagement.API.Infrastructure.Repositories.Employees.Queries;
 using Serilog;
 using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
+using EmployeeManagement.API.Features.Employees.Repositories.Commands;
+using EmployeeManagement.API.Features.Employees.Repositories.Queries;
+using EmployeeManagement.API.Features.Departments.Repositories.Commands;
+using EmployeeManagement.API.Features.Departments.Repositories.Queries;
+using EmployeeManagement.API.Features.Designations.Repositories.Commands;
+using EmployeeManagement.API.Features.Designations.Repositories.Queries;
 
 
 
