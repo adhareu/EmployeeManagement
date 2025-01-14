@@ -8,7 +8,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Designations.Commands.Create
 {
-    public class CreateDesignationCommandHandler : IRequestHandler<CreateDesignationCommand, BasePostResponseDTO<int, DesignationDto>>
+    public class CreateDesignationCommandHandler : IRequestHandler<CreateDesignationCommand, BasePostResponseDto<int, DesignationDto>>
     {
         private readonly IDesignationCommandRepository _DesignationRepository;
         private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ namespace EmployeeManagement.API.Features.Designations.Commands.Create
             _mapper = mapper;
 
         }
-        public async Task<BasePostResponseDTO<int, DesignationDto>> Handle(CreateDesignationCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<int, DesignationDto>> Handle(CreateDesignationCommand request, CancellationToken cancellationToken)
         {
             var Designation = new Designation
             {
@@ -26,7 +26,7 @@ namespace EmployeeManagement.API.Features.Designations.Commands.Create
 
             };
             var savedDesignation = await _DesignationRepository.Create(Designation, cancellationToken);
-            var DesignationAddResponse = new BasePostResponseDTO<int, DesignationDto>
+            var DesignationAddResponse = new BasePostResponseDto<int, DesignationDto>
             {
                 Id = savedDesignation.Id
            ,

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Commands.Delete
 {
-    public class DeleteEmployeeCommand : IRequest<BasePostResponseDTO<long, EmployeeDto>>
+    public class DeleteEmployeeCommand : IRequest<BasePostResponseDto<long, EmployeeDto>>
     {
        public long Id { get; set; }
         public DeleteEmployeeCommand(long id)

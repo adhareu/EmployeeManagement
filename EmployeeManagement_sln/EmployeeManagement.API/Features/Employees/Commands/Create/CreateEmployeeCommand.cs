@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Commands.Create
 {
-    public class CreateEmployeeCommand : IRequest<BasePostResponseDTO<long, EmployeeDto>>
+    public class CreateEmployeeCommand : IRequest<BasePostResponseDto<long, EmployeeDto>>
     {
         public string FirstName { get; set; }
 

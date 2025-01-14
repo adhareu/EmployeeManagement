@@ -5,7 +5,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Designations.Commands.Create
 {
-    public class CreateDesignationCommand : IRequest<BasePostResponseDTO<int, DesignationDto>>
+    public class CreateDesignationCommand : IRequest<BasePostResponseDto<int, DesignationDto>>
     {
         public string Name { get; set; }
     }

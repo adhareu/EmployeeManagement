@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Commands.Update
 {
-    public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, BasePostResponseDTO<long, EmployeeDto>>
+    public class UpdateEmployeeCommandHandler : IRequestHandler<UpdateEmployeeCommand, BasePostResponseDto<long, EmployeeDto>>
     {
         private readonly IEmployeeCommandRepository _employeeRepository;
         private readonly IEmployeeQueryRepository _employeeQueryRepository;
@@ -19,13 +19,13 @@ namespace EmployeeManagement.API.Features.Employees.Commands.Update
             _mapper = mapper;
 
         }
-        public async Task<BasePostResponseDTO<long, EmployeeDto>> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<long, EmployeeDto>> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employeeEntity = await _employeeQueryRepository.Get(request.Id, cancellationToken);
 
             var mappedDesignation = _mapper.Map(request, employeeEntity);
             var savedDesignation = await _employeeRepository.Update(mappedDesignation, cancellationToken);
-            var employeeResponse = new BasePostResponseDTO<long, EmployeeDto>
+            var employeeResponse = new BasePostResponseDto<long, EmployeeDto>
             {
                 Id = savedDesignation.Id
            ,

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Departments.Commands.Update
 {
-    public class UpdateDepartmentCommand : IRequest<BasePostResponseDTO<int, DepartmentDto>>
+    public class UpdateDepartmentCommand : IRequest<BasePostResponseDto<int, DepartmentDto>>
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -9,7 +9,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Commands.Delete
 {
-    public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, BasePostResponseDTO<long, EmployeeDto>>
+    public class DeleteEmployeeCommandHandler : IRequestHandler<DeleteEmployeeCommand, BasePostResponseDto<long, EmployeeDto>>
     {
         private readonly IEmployeeCommandRepository _employeeRepository;
         private readonly IEmployeeQueryRepository _employeeQueryRepository;
@@ -20,14 +20,14 @@ namespace EmployeeManagement.API.Features.Employees.Commands.Delete
             _employeeQueryRepository= employeeQueryRepository;
             _mapper = mapper;
         }
-        public async Task<BasePostResponseDTO<long, EmployeeDto>> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<long, EmployeeDto>> Handle(DeleteEmployeeCommand request, CancellationToken cancellationToken)
         {
             var EmployeeEntity = await _employeeQueryRepository.Get(request.Id, cancellationToken);
 
             var mappedEmployee = _mapper.Map<Employee>(EmployeeEntity);
             mappedEmployee.IsDeleted = true;
             var savedEmployee= await _employeeRepository.Update(mappedEmployee, cancellationToken);
-            var EmployeeResponse = new BasePostResponseDTO<long, EmployeeDto>
+            var EmployeeResponse = new BasePostResponseDto<long, EmployeeDto>
             {
                 Id = savedEmployee.Id
            ,
