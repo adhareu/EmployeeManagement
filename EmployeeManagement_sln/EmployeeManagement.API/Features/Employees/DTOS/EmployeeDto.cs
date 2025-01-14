@@ -1,6 +1,6 @@
 ﻿namespace EmployeeManagement.API.Features.Employees.DTOS
 {
-    public class EmployeeDto
+    public record EmployeeDto
     {
         public string FirstName { get; set; }=string.Empty;
 
