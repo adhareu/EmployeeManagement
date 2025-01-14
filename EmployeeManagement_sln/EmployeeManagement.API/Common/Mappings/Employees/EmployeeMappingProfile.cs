@@ -11,7 +11,7 @@ namespace EmployeeManagement.API.Common.Mappings.Employees
     {
         public EmployeeMappingProfile()
         {
-            CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<Employee, EmployeePostDto>().ReverseMap();
             CreateMap<Employee, CreateEmployeeCommand>().ReverseMap();
             CreateMap<Employee, UpdateEmployeeCommand>().ReverseMap();
             CreateMap<Employee, DeleteEmployeeCommand>().ReverseMap();

@@ -3,6 +3,6 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Get
 {
-    public record GetEmployeeByIdQuery(long Id) : IRequest<EmployeeDto>;
+    public record GetEmployeeByIdQuery(long Id) : IRequest<EmployeeGetDto>;
 
 }

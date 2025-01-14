@@ -12,7 +12,7 @@ namespace EmployeeManagement.API.Common.Mappings.Designations
     {
         public DesignationMappingProfile()
         {
-            CreateMap<Designation, DesignationDto>().ReverseMap();
+            CreateMap<Designation, DesignationListDto>().ReverseMap();
             CreateMap<Designation, CreateDesignationCommand>().ReverseMap();
             CreateMap<Designation, UpdateDesignationCommand>().ReverseMap();
             CreateMap<Designation, DeleteDesignationCommand>().ReverseMap();

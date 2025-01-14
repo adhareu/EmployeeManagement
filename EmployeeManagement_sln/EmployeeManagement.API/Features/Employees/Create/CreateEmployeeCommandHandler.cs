@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Create
 {
-    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, BasePostResponseDto<long, EmployeeDto>>
+    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, BasePostResponseDto<long, EmployeePostDto>>
     {
         private readonly IEmployeeCommandRepository _employeeRepository;
         private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ namespace EmployeeManagement.API.Features.Employees.Create
             _mapper = mapper;
 
         }
-        public async Task<BasePostResponseDto<long, EmployeeDto>> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<long, EmployeePostDto>> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = new Employee
             {
@@ -34,7 +34,7 @@ namespace EmployeeManagement.API.Features.Employees.Create
 
             };
             var savedemployee = await _employeeRepository.Create(employee, cancellationToken);
-            var employeeAddResponse = new BasePostResponseDto<long, EmployeeDto>
+            var employeeAddResponse = new BasePostResponseDto<long, EmployeePostDto>
             {
                 Id = savedemployee.Id
            ,

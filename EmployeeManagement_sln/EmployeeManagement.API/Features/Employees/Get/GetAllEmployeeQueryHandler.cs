@@ -6,7 +6,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Get
 {
-    public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, IEnumerable<EmployeeDto>>
+    public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, IEnumerable<EmployeeListDto>>
     {
         private readonly IEmployeeQueryRepository _EmployeeQueryRepository;
         private readonly IMapper _mapper;
@@ -16,9 +16,9 @@ namespace EmployeeManagement.API.Features.Employees.Get
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<EmployeeDto>> Handle(GetAllEmployeeQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<EmployeeListDto>> Handle(GetAllEmployeeQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(await _EmployeeQueryRepository.GetAll(cancellationToken));
+            return _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeListDto>>(await _EmployeeQueryRepository.GetAll(cancellationToken));
         }
     }
 }

@@ -25,19 +25,19 @@ namespace EmployeeManagement.API.Features.Employees.Controllers
         }
         [HttpGet("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<EmployeeDto>> GetAll()
+        public async Task<ActionResult<EmployeeListDto>> GetAll()
         {
             var response = await _mediator.Send(new GetAllEmployeeQuery());
             return Ok(response);
         }
         [HttpPost]
-        public async Task<ActionResult<BasePostResponseDto<long, EmployeeDto>>> CreateEmployee([FromBody] CreateEmployeeCommand command)
+        public async Task<ActionResult<BasePostResponseDto<long, EmployeePostDto>>> CreateEmployee([FromBody] CreateEmployeeCommand command)
         {
             var response = await _mediator.Send(command);
             return Ok(response);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployeeDto>> GetEmployee(long id)
+        public async Task<ActionResult<EmployeeGetDto>> GetEmployee(long id)
         {
             var employee = await _mediator.Send(new GetEmployeeByIdQuery(id));
 
@@ -48,7 +48,7 @@ namespace EmployeeManagement.API.Features.Employees.Controllers
         }
         [HttpPut]
 
-        public async Task<ActionResult<BasePostResponseDto<long, EmployeeDto>>> Update([FromBody] UpdateEmployeeCommand command)
+        public async Task<ActionResult<BasePostResponseDto<long, EmployeePostDto>>> Update([FromBody] UpdateEmployeeCommand command)
         {
 
             var response = await _mediator.Send(command);
@@ -58,7 +58,7 @@ namespace EmployeeManagement.API.Features.Employees.Controllers
         }
         [HttpDelete]
 
-        public async Task<ActionResult<BasePostResponseDto<long, EmployeeDto>>> Delete(long Id)
+        public async Task<ActionResult<BasePostResponseDto<long, EmployeePostDto>>> Delete(long Id)
         {
 
             var response = await _mediator.Send(new DeleteEmployeeCommand(Id));

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Designations.Delete
 {
-    public class DeleteDesignationCommand : IRequest<BasePostResponseDto<int, DesignationDto>>
+    public record DeleteDesignationCommand : IRequest<BasePostResponseDto<int, DesignationPostDto>>
     {
         public int Id { get; set; }
         public DeleteDesignationCommand(int id)

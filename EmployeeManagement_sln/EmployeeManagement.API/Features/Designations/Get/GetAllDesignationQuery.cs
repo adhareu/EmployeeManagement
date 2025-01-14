@@ -3,7 +3,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Designations.Get
 {
-    public class GetAllDesignationQuery : IRequest<IEnumerable<DesignationDto>>
+    public class GetAllDesignationQuery : IRequest<IEnumerable<DesignationListDto>>
     {
     }
 }

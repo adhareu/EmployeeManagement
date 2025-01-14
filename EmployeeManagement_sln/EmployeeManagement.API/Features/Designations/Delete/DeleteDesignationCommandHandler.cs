@@ -9,7 +9,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Designations.Delete
 {
-    public class DeleteDesignationCommandHandler : IRequestHandler<DeleteDesignationCommand, BasePostResponseDto<int, DesignationDto>>
+    public class DeleteDesignationCommandHandler : IRequestHandler<DeleteDesignationCommand, BasePostResponseDto<int, DesignationPostDto>>
     {
         private readonly IDesignationCommandRepository _DesignationRepository;
         private readonly IDesignationQueryRepository _DesignationQueryRepository;
@@ -20,14 +20,14 @@ namespace EmployeeManagement.API.Features.Designations.Delete
             _DesignationQueryRepository = DesignationQueryRepository;
             _mapper = mapper;
         }
-        public async Task<BasePostResponseDto<int, DesignationDto>> Handle(DeleteDesignationCommand request, CancellationToken cancellationToken)
+        public async Task<BasePostResponseDto<int, DesignationPostDto>> Handle(DeleteDesignationCommand request, CancellationToken cancellationToken)
         {
             var DesignationEntity = await _DesignationQueryRepository.Get(request.Id, cancellationToken);
 
             var mappedDesignation = _mapper.Map<Designation>(DesignationEntity);
             mappedDesignation.IsDeleted = true;
             var savedDesignation = await _DesignationRepository.Update(mappedDesignation, cancellationToken);
-            var DesignationResponse = new BasePostResponseDto<int, DesignationDto>
+            var DesignationResponse = new BasePostResponseDto<int, DesignationPostDto>
             {
                 Id = savedDesignation.Id
            ,

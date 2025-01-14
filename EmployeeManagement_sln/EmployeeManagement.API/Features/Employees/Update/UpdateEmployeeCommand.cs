@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Employees.Update
 {
-    public class UpdateEmployeeCommand : IRequest<BasePostResponseDto<long, EmployeeDto>>
+    public record UpdateEmployeeCommand : IRequest<BasePostResponseDto<long, EmployeePostDto>>
     {
         public long Id { get; set; }
         public string FirstName { get; set; } = string.Empty;

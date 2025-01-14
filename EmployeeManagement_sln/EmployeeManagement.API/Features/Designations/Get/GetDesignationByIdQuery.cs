@@ -3,6 +3,6 @@ using MediatR;
 
 namespace EmployeeManagement.API.Features.Designations.Get
 {
-    public record GetDesignationByIdQuery(int Id) : IRequest<DesignationDto>;
+    public record GetDesignationByIdQuery(int Id) : IRequest<DesignationGetDto>;
 
 }

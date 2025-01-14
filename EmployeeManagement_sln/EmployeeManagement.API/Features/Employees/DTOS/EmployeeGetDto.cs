@@ -1,7 +1,8 @@
 ﻿namespace EmployeeManagement.API.Features.Employees.DTOS
 {
-    public record EmployeeDto
+    public record EmployeeGetDto
     {
+        public long Id { get; set; }
         public string FirstName { get; set; }=string.Empty;
 
         public string LastName { get; set; } = string.Empty;
