@@ -10,6 +10,7 @@ using System.Text;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using EmployeeManagement.API.Features.Users.Services;
 
 
 
@@ -39,6 +40,8 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
     );
 });
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IHttpContextService, HttpContextService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApiVersioning(config =>
