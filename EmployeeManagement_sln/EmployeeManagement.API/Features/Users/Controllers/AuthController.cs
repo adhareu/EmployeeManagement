@@ -29,11 +29,7 @@ namespace EmployeeManagement.API.Features.Users.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginCommand loginRequest)
         {
-            // Here, validate the user credentials from the database (this is just a mock)
-            if (loginRequest.UserName != "admin" || loginRequest.Password != "admin")
-            {
-                return Unauthorized("Invalid username or password.");
-            }
+          
             try
             {
                 var response = await _mediator.Send(loginRequest);
