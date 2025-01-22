@@ -8,12 +8,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
-using EmployeeManagement.API.Features.Employees.Repositories.Commands;
-using EmployeeManagement.API.Features.Employees.Repositories.Queries;
-using EmployeeManagement.API.Features.Departments.Repositories.Commands;
-using EmployeeManagement.API.Features.Departments.Repositories.Queries;
-using EmployeeManagement.API.Features.Designations.Repositories.Commands;
-using EmployeeManagement.API.Features.Designations.Repositories.Queries;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 
 
@@ -29,12 +25,7 @@ builder.Host.UseSerilog();
 // Add services to the container.
 builder.Services.AddDbContext<EmployeeManagementDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeManagementDbConnection")));
-builder.Services.AddScoped<IEmployeeCommandRepository, EmployeeCommandRepository>();
-builder.Services.AddScoped<IEmployeeQueryRepository, EmployeeQueryRepository>();
-builder.Services.AddScoped<IDepartmentCommandRepository, DepartmentCommandRepository>();
-builder.Services.AddScoped<IDepartmentQueryRepository, DepartmentQueryRepository>();
-builder.Services.AddScoped<IDesignationCommandRepository, DesignationCommandRepository>();
-builder.Services.AddScoped<IDesignationQueryRepository, DesignationQueryRepository>();
+builder.Services.AddRepositories();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
@@ -92,7 +83,10 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 });
+// Sql server health check
 
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<EmployeeManagementDbContext> ("employeedbcontext");
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -117,5 +111,17 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+// Cofigure for health check
+app.MapHealthChecks("/hc", new HealthCheckOptions()
+{
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+});
 
+//a basic health probe configuration that reports the app's availability to process requests (liveness) is sufficient to discover the status of the app.
+app.MapHealthChecks("/liveness", new HealthCheckOptions()
+{
+    Predicate = r => r.Name.Contains("self"),
+});
 app.Run();
+
