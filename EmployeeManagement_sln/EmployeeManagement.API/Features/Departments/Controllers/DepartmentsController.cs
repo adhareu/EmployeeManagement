@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using EmployeeManagement.API.Common.Models;
 
 namespace EmployeeManagement.API.Features.Departments.Controllers
 {
@@ -15,7 +16,7 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
     [EnableCors("CorsPolicy")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class DepartmentsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -27,6 +28,7 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
         }
         [HttpGet("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesErrorResponseType(typeof(CustomError))]
         public async Task<ActionResult<DepartmentListDto>> GetAll()
         {
             _logger.LogInformation("Get All Departments");
@@ -34,6 +36,8 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
             return Ok(response);
         }
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesErrorResponseType(typeof(CustomError))]
         public async Task<ActionResult<DepartmentGetDto>> Get(int id)
         {
             _logger.LogInformation("Get All Departments by {Id}",id);
@@ -45,6 +49,8 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
             return Ok(department);
         }
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesErrorResponseType(typeof(CustomError))]
         public async Task<ActionResult<BasePostResponseDto<int,DepartmentPostDto>>> Create([FromBody] CreateDepartmentCommand command)
         {
             _logger.LogInformation("Creating Department with name {Name}", command.Name);
@@ -54,7 +60,8 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
         }
        
         [HttpPut]
-      
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesErrorResponseType(typeof(CustomError))]
         public async Task<ActionResult<BasePostResponseDto<int, DepartmentPostDto>>> Update([FromBody] UpdateDepartmentCommand command)
         {
             _logger.LogInformation("Updating Department with name {Name}", command.Name);
@@ -65,7 +72,8 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
 
         }
         [HttpDelete]
-
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesErrorResponseType(typeof(CustomError))]
         public async Task<ActionResult<BasePostResponseDto<int, DepartmentPostDto>>> Delete(int Id)
         {
             _logger.LogInformation("Deleting Department with id {Id}", Id);

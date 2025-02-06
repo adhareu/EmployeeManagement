@@ -15,7 +15,7 @@ namespace EmployeeManagement.API.Features.Employees.Create
         {
             _departmentQueryRepository = departmentQueryRepository;
             _designationQueryRepository = designationQueryRepository;
-
+            RuleLevelCascadeMode = CascadeMode.Stop;
             RuleFor(x => x.FirstName).NotEmpty().NotNull().WithMessage("FirstName can not be null or empty");
             RuleFor(x => x.LastName).NotEmpty().NotNull().WithMessage("LastName can not be null or empty");
             RuleFor(x => x.Email).NotEmpty().NotNull().WithMessage("LastName can not be null or empty");

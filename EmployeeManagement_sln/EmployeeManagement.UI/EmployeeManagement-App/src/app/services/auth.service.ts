@@ -28,8 +28,9 @@ export class AuthService {
   // Login function
   refresh(): Observable<LoginResponse> {
     const username = this.getUsernameFromToken(); // Extract username from the token
-    return this.http.post<LoginResponse>(`${environment.base_Url}/Auth/refresh`, { username}).pipe(
+    return this.http.post<LoginResponse>(`${environment.base_Url}/Auth/refresh`, {username}).pipe(
       tap((response: LoginResponse) => {
+        console.log('Refresh Token Called');
         this.setAccessToken(response.accessToken);
         this.setRefreshToken(response.refreshToken);
       })
@@ -45,26 +46,31 @@ export class AuthService {
 
   // Store Access Token
   private setAccessToken(token: string): void {
+    console.log('Access Token set');
     localStorage.setItem('access_token', token);
     this.tokenSubject.next(token);
   }
 
   // Store Refresh Token
   private setRefreshToken(token: string): void {
+    console.log('Refresh Token set');
     localStorage.setItem('refresh_token', token);
   }
 
   // Get Access Token
   getAccessToken(): string | null {
+    console.log('Access Token get');
     return localStorage.getItem('access_token');
   }
 
   // Get Refresh Token
   getRefreshToken(): string | null {
+    console.log('Refresh Token get');
     return localStorage.getItem('refresh_token');
   }
   // Check if user is authenticated
   isAuthenticated(): boolean {
+    console.log('isAuthenticated called');
     const token = this.getAccessToken();
     if (!token) return false;
     return true;
@@ -77,7 +83,9 @@ export class AuthService {
 
     try {
       const decodedToken: any = jwtDecode(token);
-      return decodedToken.name || decodedToken.sub || null;
+      console.log(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
+      var name=decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+      return name;
     } catch (error) {
       return null;
     }

@@ -3,15 +3,47 @@
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <form>
+            <form [formGroup]="departmentForm"  (ngSubmit)="onSubmit()" novalidate>
             <div class="card mb-4">
               <div class="card-header"><h3 class="card-title">{{title}}</h3></div>
               <div class="card-body">
-               
+                <input type="hidden" formControlName="id" />
                 <div class="row mb-3">
-                    <label for="inputname" class="col-sm-2 col-form-label">Name</label>
+                    <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputname" [(ngModel)]="name" />
+                      <input type="text" class="form-control" id="name"  formControlName="name" placeholder="Name"/>
+                      @if( departmentForm.get('name')?.invalid &&
+                      departmentForm.get('name')?.errors &&
+                      (departmentForm.get('name')?.dirty ||
+                      departmentForm.get('name')?.touched))
+                      {
+                        <div class="col-sm-10">
+                          @if(departmentForm.get('name')?.hasError('required'))
+                          {
+                            <span class="text-danger" >
+                              This field is required.
+                            </span>
+                          }
+                          @if(departmentForm.get('name')?.hasError('minlength'))
+                          {
+                            <span class="text-danger">
+                              The minimum length for this field is
+                              {{ departmentForm.get("name")?.errors?.['minlength']?.requiredLength }}
+                              characters.
+                            </span>
+                          }
+                          @if(departmentForm.get('name')?.hasError('maxlength'))
+                          {
+                            <span class="text-danger">
+                            The maximum length for this field is
+                            {{ departmentForm.get("name")?.errors?.['maxlength']?.requiredLength }}
+                            characters.
+                          </span>
+                          }
+                          
+                        </div>  
+                      }
+                     
                     </div>
                   </div>
               </div>

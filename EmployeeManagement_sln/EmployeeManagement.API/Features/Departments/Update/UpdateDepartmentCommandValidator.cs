@@ -10,7 +10,7 @@ namespace EmployeeManagement.API.Features.Departments.Update
         public UpdateDepartmentCommandValidator(IDepartmentQueryRepository departmentRepository)
         {
             _departmentQueryRepository = departmentRepository;
-           
+            RuleLevelCascadeMode = CascadeMode.Stop;
             RuleFor(x => x.Name).NotEmpty().NotNull().WithMessage("Name can not be null or empty");
 
             RuleFor(x => new { x.Id, x.Name }).CustomAsync(async (property, context, cancellationToken) =>

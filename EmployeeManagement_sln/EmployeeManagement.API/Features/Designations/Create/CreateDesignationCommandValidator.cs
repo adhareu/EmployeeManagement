@@ -10,7 +10,7 @@ namespace EmployeeManagement.API.Features.Designations.Create
         public CreateDesignationCommandValidator(IDesignationQueryRepository designationRepository)
         {
             _designationQueryRepository = designationRepository;
-            
+            RuleLevelCascadeMode = CascadeMode.Stop;
             RuleFor(x => x.Name).NotEmpty().NotNull().WithMessage("Name can not be null or empty");
 
             RuleFor(x => new { x.Name }).CustomAsync(async (property, context, cancellationToken) =>
