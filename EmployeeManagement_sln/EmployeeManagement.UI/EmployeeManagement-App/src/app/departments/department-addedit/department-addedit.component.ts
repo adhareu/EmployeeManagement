@@ -61,16 +61,23 @@ onSubmit()
 
       this.httpService.put(environment.base_Url,'departments',this.departmentForm.value,null)
       .subscribe((res:any)=>{
+        
           if(res.success)
           {
             this.alertService.success(res.message);
           }else
+          {
+           
             this.alertService.error(res.message);
+          }
+            
       });
     }else
     {
+      console.log('Post Method called');
       this.httpService.post(environment.base_Url,'departments',this.departmentForm.value)
       .subscribe((res:any)=>{
+        console.log(res);
         if(res.success)
         {
           this.alertService.success(res.message);

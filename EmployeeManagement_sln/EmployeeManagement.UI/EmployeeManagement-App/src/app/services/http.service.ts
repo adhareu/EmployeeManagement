@@ -48,7 +48,7 @@ hostName:string|undefined=environment.base_Url;
     //error client
     errorMessage = error.error ? error.error[0]?.message : 'Some error occured';
 
-    return throwError(errorMessage ?? 'Something went wrong');
+    return throwError(()=>new Error(errorMessage ?? 'Something went wrong'));
   }
 
 

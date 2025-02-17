@@ -27,7 +27,7 @@ namespace EmployeeManagement.API.Features.Designations.Repositories.Queries
             }
             else
             {
-                return await _context.Designations.AnyAsync(e => !e.IsDeleted && e.Id != id && string.Equals(e.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
+                return await _context.Designations.AnyAsync(e => !e.IsDeleted && e.Id != id && name.ToLower() == e.Name.ToLower(), cancellationToken);
 
             }
         }

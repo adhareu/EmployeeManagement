@@ -20,7 +20,7 @@ namespace EmployeeManagement.API.Features.Departments.Repositories.Queries
         {
             if (id == null)
             {
-                return await _context.Departments.AnyAsync(e => !e.IsDeleted && string.Equals(e.Name, name, StringComparison.OrdinalIgnoreCase), cancellationToken);
+                return await _context.Departments.AnyAsync(e => !e.IsDeleted && name.ToLower() == e.Name.ToLower(), cancellationToken);
             }
             else
             {
