@@ -11,9 +11,9 @@ namespace EmployeeManagement.API.Features.Departments.Create
         public CreateDepartmentCommandValidator(IDepartmentQueryRepository departmentRepository)
         {
             _departmentQueryRepository = departmentRepository;
-           
-            //RuleFor(x => x.Name).NotEmpty().NotNull().WithMessage("Name can not be null or empty");
 
+            //RuleFor(x => x.Name).NotEmpty().NotNull().WithMessage("Name can not be null or empty");
+           
             RuleFor(x => new { x.Name }).CustomAsync(async (property, context, cancellationToken) =>
             {
                 if(string.IsNullOrEmpty(property.Name.Trim()))

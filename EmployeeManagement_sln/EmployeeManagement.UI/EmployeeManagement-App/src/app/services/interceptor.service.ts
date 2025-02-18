@@ -8,7 +8,7 @@ export const interceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: 
   const authService = inject(AuthService); // ✅ Use inject() to get services in functions
   const accessToken = authService.getAccessToken();
   let clonedRequest = req;
-
+  console.log('Intercept called');
   if (accessToken) {
     clonedRequest = req.clone({
       setHeaders: { Authorization: `Bearer ${accessToken}` },

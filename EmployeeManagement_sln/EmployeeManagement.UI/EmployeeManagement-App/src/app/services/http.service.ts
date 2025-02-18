@@ -44,10 +44,10 @@ hostName:string|undefined=environment.base_Url;
   }
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
-
+   
     //error client
     errorMessage = error.error ? error.error[0]?.message : 'Some error occured';
-
+   
     return throwError(()=>new Error(errorMessage ?? 'Something went wrong'));
   }
 

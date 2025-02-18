@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders,
+  HttpParams
+ } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule, FormBuilder,FormGroup,Validators,ReactiveFormsModule, FormControl  } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
@@ -76,13 +79,25 @@ onSubmit()
     {
       console.log('Post Method called');
       this.httpService.post(environment.base_Url,'departments',this.departmentForm.value)
-      .subscribe((res:any)=>{
-        console.log(res);
-        if(res.success)
-        {
-          this.alertService.success(res.message);
-        }else
-          this.alertService.error(res.message);
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          if (res.success) {
+            this.alertService.success(res.message);
+          } else {
+            this.alertService.error(res.message);
+          }
+        },
+        error: (err:any) => {
+        
+          let errorMessage = '';
+   
+          //error client
+          errorMessage =err?.error?.message || err?.message || 'An unknown error occurred!';
+
+
+          this.alertService.error(errorMessage);
+        }
       });
     }
   }else

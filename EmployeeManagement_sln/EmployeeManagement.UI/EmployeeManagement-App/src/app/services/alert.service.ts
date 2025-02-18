@@ -26,32 +26,11 @@ export class AlertService {
     });
   }
   error(message: string) {
-    const words = message.split(' ');
-    let truncatedMessage = '';
+    console.log(message);
+   
+    let truncatedMessage = message;
   
-    for (const word of words) {
-      if (word.length > 15) {
-        const splitWords = [];
-        let currentWord = '';
-  
-        for (let i = 0; i < word.length; i++) {
-          currentWord += word[i];
-  
-          if (currentWord.length === 15) {
-            splitWords.push(currentWord);
-            currentWord = '';
-          }
-        }
-  
-        if (currentWord.length > 0) {
-          splitWords.push(currentWord);
-        }
-  
-        truncatedMessage += splitWords.join(' ') + ' ';
-      } else {
-        truncatedMessage += word + ' ';
-      }
-    }
+   
     this.toastService.error(truncatedMessage, {
       style: {
         border: '1px solid #ddd',

@@ -16,7 +16,7 @@ namespace EmployeeManagement.API.Features.Departments.Controllers
     [EnableCors("CorsPolicy")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class DepartmentsController : ControllerBase
     {
         private readonly IMediator _mediator;
